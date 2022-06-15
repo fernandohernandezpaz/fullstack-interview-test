@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  flatbackend_app:
+    image: flatbackend_app
+    container_name: flatbackend_app
+    command: python manage.py runserver 0.0.0.0:8001
+#    command: tail -f /dev/null
+    build:
+      context: .
+      dockerfile: ./docker/python_backend/Dockerfile
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./backend/githistory_api/:/app
+    networks:
+      - flat_network
+
+networks:
+  flat_network:
+    driver: bridge
