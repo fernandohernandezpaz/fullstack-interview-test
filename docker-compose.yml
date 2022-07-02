@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3"
 services:
   flatbackend_app:
     image: flatbackend_app
@@ -12,6 +12,19 @@ services:
       - "8001:8001"
     volumes:
       - ./backend/githistory_api/:/app
+    networks:
+      - flat_network
+  flat_db:
+    container_name: flat_db
+    image: postgres:11.13-alpine3.14
+    volumes:
+      - ./db/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
     networks:
       - flat_network
 
