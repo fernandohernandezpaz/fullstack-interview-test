@@ -1,0 +1,58 @@
+{
+	"info": {
+		"_postman_id": "a6696c7a-f327-4e8b-a975-c3a1e216e017",
+		"name": "Flat",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5459513"
+	},
+	"item": [
+		{
+			"name": "Get commits",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://0.0.0.0:8001/api/commits/",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8001",
+					"path": [
+						"api",
+						"commits",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get authors",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://0.0.0.0:8001/api/authors/",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8001",
+					"path": [
+						"api",
+						"authors",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
