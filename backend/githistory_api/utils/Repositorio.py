@@ -104,7 +104,9 @@ class Repositorio:
         return remote_branches
 
     def obtener_rama(self, branch_name: str = 'master') -> Dict:
+        self.repo.git.execute(['git', 'checkout', branch_name])
         commits = list(self.repo.iter_commits(branch_name))
+
         def modificar_commit(commit: Commit) -> Dict:
             date: str = commit.committed_datetime.strftime(self.format)
             return {
@@ -129,27 +131,4 @@ class Repositorio:
             [str,str,...,str]
         """
         remote_branches: List[str] = []
-        prnums = []
-        # From regular merges
-        merges = self.repo.git.log('--oneline', '--merges')
-        issues = re.findall(u"Merge pull request \\#(\\d*)", merges)
-        prnums.extend(int(s) for s in issues)
-
-        # From Homu merges (Auto merges)
-        issues = re.findall(u"Auto merge of \\#(\\d*)", merges)
-        prnums.extend(int(s) for s in issues)
-
-        # From fast forward squash-merges
-        commits = self.repo.git.log('--oneline', '--no-merges', '--first-parent')
-        issues = re.findall(u'^.*\\(\\#(\\d+)\\)$', commits, re.M)
-        prnums.extend(int(s) for s in issues)
-
-        # get PR data from github repo
-        prnums.sort()
-        prs = [self.repo.get_pull(n) for n in prnums]
-        # print(self.repo.git.execute(['git', 'ls-remote', 'origin', 'pull-requests/*']))
-        # print(self.repo.git.iter_pulls(state="open"))
-        # for branch in self.repo.git.branch('-r').split('\n'):
-        #     if 'HEAD' not in branch:
-        #         remote_branches.append(branch.strip())
         return remote_branches

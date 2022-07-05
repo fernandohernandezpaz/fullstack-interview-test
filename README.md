@@ -2,13 +2,24 @@
 Interview test for fullstack Software Engineers
 
 # Instrucciones
-### Paso 1 ejecutar en la terminarl
-```
- docker-compose up 
- ```
-o
+Recomendado realizar pruebas en linux
+
+| Requisito  | Version |
+|------------|---------|
+| Python     | \>= 3.7 |
+| Django     | 3.2     |
+| virtualenv | 20.14.1 |
+| node       | 16.14.2 |
+| npm        | 8.5.0   |
+
+### Ejecutar en la terminar
 ```
 ./start_app.sh
+```
+
+### Si desea correr los test utilizar siguiente comando teniendo activo el contenedor
+```
+docker-compose exec flatbackend_app sh -c "python manage.py test"
 ```
 
 ## Welcome!

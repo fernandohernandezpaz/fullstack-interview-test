@@ -68,6 +68,7 @@ class BranchTestCase(TestCase):
         url = reverse('detail_branch', kwargs={
             'branch_name': name
         })
+        print(url)
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
