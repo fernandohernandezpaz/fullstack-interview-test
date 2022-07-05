@@ -1,0 +1,28 @@
+@import "materialize-css/sass/materialize";
+// variables
+
+// logo size
+$size: 50px;
+
+
+nav {
+  .brand-logo {
+    img.App-logo {
+      height: $size;
+      width: $size;
+    }
+  }
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.mt-1 {
+   margin-top: 1rem;
+
+}
+.mt-2 {
+   margin-top: 1.3rem;
+
+}
