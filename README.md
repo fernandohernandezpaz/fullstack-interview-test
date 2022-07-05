@@ -1,6 +1,16 @@
 # fullstack-interview-test
 Interview test for fullstack Software Engineers
 
+# Instrucciones
+### Paso 1 ejecutar en la terminarl
+```
+ docker-compose up 
+ ```
+o
+```
+./start_app.sh
+```
+
 ## Welcome!
 If you're reading this, it means we're interested in working with you and solving amazing and difficult problems in real-estate tech in Mexico.
 

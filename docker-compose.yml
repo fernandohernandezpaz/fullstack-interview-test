@@ -4,7 +4,7 @@ services:
     image: flatbackend_app
     container_name: flatbackend_app
     command: python manage.py runserver 0.0.0.0:8001
-#    command: tail -f /dev/null
+    #    command: tail -f /dev/null
     build:
       context: .
       dockerfile: ./docker/python_backend/Dockerfile
@@ -18,7 +18,7 @@ services:
     container_name: flat_db
     image: postgres:11.13-alpine3.14
     volumes:
-      - ./db/data:/var/lib/postgresql/data
+      - flat-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
@@ -27,6 +27,10 @@ services:
       - "5432:5432"
     networks:
       - flat_network
+
+volumes:
+  flat-data:
+    driver: local
 
 networks:
   flat_network:

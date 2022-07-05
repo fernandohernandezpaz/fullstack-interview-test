@@ -1,5 +1,4 @@
 import re
-from datetime import datetime
 from git import Repo, Commit
 from git.exc import GitCommandError
 from typing import Optional, List, Dict
@@ -87,7 +86,7 @@ class Repositorio:
                 authors.append(author_name)
 
                 commits_authors.append({
-                    'autor': author_name,
+                    'nombre': author_name,
                 })
 
         return commits_authors
