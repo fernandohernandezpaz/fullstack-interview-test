@@ -9,6 +9,7 @@ class Repositorio:
     repo_path: str = 'https://github.com/fernandohernandezpaz/fullstack-interview-test.git'
     repo: Repo = None
     temporal_dir: str = '/tmp/repo'
+    format = '%Y-%m-%d %I:%M:%S %p'
 
     def __init__(self, url_repo: Optional[str] = None):
         if url_repo:
@@ -17,6 +18,10 @@ class Repositorio:
             self.repo = Repo.clone_from(self.repo_path, self.temporal_dir)
         except GitCommandError:
             self.repo = Repo.init(self.temporal_dir)
+
+        self.repo.git.execute(['git', 'checkout', 'master'])
+        self.repo.git.execute(['git', 'pull'])
+
         if self.verificar_cargado_repositorio():
             print('El repositorio {} cargo exitosamente.'.format(self.repo_path))
         else:
@@ -38,6 +43,7 @@ class Repositorio:
                 'hash': str
             }]
         """
+        self.repo.git.execute(['git', 'checkout', branch_name])
         commits_branch: List[Commit] = list(self.repo.iter_commits(branch_name, max_count=limit))
         commits: List[Dict[str:str]] = []
         for c in commits_branch:
@@ -52,9 +58,7 @@ class Repositorio:
 
     def obtener_commit(self, hash: str = '') -> Dict[str, str]:
         commit_found: Commit = self.repo.commit(hash)
-        format = '%Y-%m-%d %I:%M:%S %p'
-        date: str = commit_found.committed_datetime.strftime(format)
-        print(commit_found.stats.files)
+        date: str = commit_found.committed_datetime.strftime(self.format)
         commit: Dict[str, str] = {
             'mensaje': commit_found.message.strip(),
             'autor': commit_found.author.name,
@@ -62,7 +66,6 @@ class Repositorio:
             'datetime': date,
             'archivos': commit_found.stats.files,
         }
-        # commit = self.repo.git.execute(['git', 'show', hash])
         return commit
 
     def obtener_lista_autores(self, branch_name: str = 'master', limit: Optional[int] = None) -> List[Dict[str, str]]:
@@ -98,8 +101,27 @@ class Repositorio:
         remote_branches: List[str] = []
         for branch in self.repo.git.branch('-r').split('\n'):
             if 'HEAD' not in branch:
-                remote_branches.append(branch.strip())
+                remote_branches.append(branch.strip().split('/')[-1])
         return remote_branches
+
+    def obtener_rama(self, branch_name: str = 'master') -> Dict:
+        commits = list(self.repo.iter_commits(branch_name))
+        def modificar_commit(commit: Commit) -> Dict:
+            date: str = commit.committed_datetime.strftime(self.format)
+            return {
+                'mensaje': commit.message.strip(),
+                'autor': commit.author.name,
+                'correo': commit.author.email,
+                'datetime': date,
+                'archivos': commit.stats.files,
+            }
+
+        branch: Dict = {
+            'nombre': branch_name,
+            'commits': map(modificar_commit, commits)
+        }
+
+        return branch
 
     def obtener_lista_pull_requests(self) -> List[str]:
         """

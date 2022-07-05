@@ -13,11 +13,11 @@ const CommitDetailPage = () => {
                 .then(response => {
                     const {mensaje, autor, correo, datetime, archivos} = response.data;
                     setCommit(
-                        <div className={'col s12'}>
-                            <div className="card w-100 mt-2">
-                                <div className="card-content">
-                                    <p className={'center-align'}>
-                                        <i className={'material-icons medium'}>comment</i>
+                        <div className={'col-8 mx-auto mt-2'}>
+                            <div className="card w-100">
+                                <div className="card-body">
+                                    <p className={'text-center'}>
+                                        <i className={'material-icons medium-size-icon'}>comment</i>
                                     </p>
                                     <p>Hash: {hash}</p>
                                     <p>Realizado el: {datetime}</p>
@@ -25,8 +25,8 @@ const CommitDetailPage = () => {
                                     <p>Bajo el mensaje: ${mensaje}</p>
                                     <p>Cantidad Archivos: ${archivos.length}</p>
                                 </div>
-                                <div className="card-action">
-                                    <a href="/commits/"  className={'btn text-darken-1'}>Regresar</a>
+                                <div className="card-footer">
+                                    <a href="/commits/"  className={'btn btn-link'}>Regresar</a>
                                 </div>
                             </div>
                         </div>

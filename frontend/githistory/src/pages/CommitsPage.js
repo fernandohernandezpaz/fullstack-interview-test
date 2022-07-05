@@ -29,8 +29,8 @@ const CommitsPage = () => {
     return (
         <>
             <div className="row">
-                <div className="col s-12">
-                    <table className="striped w-100">
+                <div className="col-12 mt-2">
+                    <table className="table table-striped w-100">
                         <thead>
                         <tr>
                             <th>Autor</th>

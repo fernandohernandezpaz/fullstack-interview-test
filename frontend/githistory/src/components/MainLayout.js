@@ -1,4 +1,3 @@
-import 'materialize-css/dist/js/materialize.min.js'
 import Navbar from "./Navbar";
 
 const MainLayout = (props) => {

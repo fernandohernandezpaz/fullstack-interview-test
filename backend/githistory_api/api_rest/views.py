@@ -25,14 +25,14 @@ class ListCommits(APIView):
 
 class DetailCommit(APIView):
     """
-        View to list all the commits.
+        View to return detail of a commit
     """
     authentication_classes = []
     permission_classes = []
 
     def get(self, request, hash):
         """
-        Return a list of all users.
+        Return a detail of commit.
         """
         commit = repositorio.obtener_commit(hash)
 
@@ -71,6 +71,22 @@ class ListBranchs(APIView):
         branchs = repositorio.obtener_lista_ramas()
 
         return Response(branchs)
+
+
+class DetailBranch(APIView):
+    """
+        View of detail branch
+    """
+    authentication_classes = []
+    permission_classes = []
+
+    def get(self, request, branch_name):
+        """
+        Return a dict with details of branch
+        """
+        detail = repositorio.obtener_rama(branch_name)
+
+        return Response(detail)
 
 
 class ListPullRequests(APIView):

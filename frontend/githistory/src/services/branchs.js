@@ -6,3 +6,9 @@ export function obtenerBranchs(query) {
         params: query
     });
 }
+
+export function obtenerBranch(name) {
+    return request({
+        url: `/branchs/${name}/`,
+    });
+}

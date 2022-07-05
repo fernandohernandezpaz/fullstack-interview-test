@@ -1,5 +1,6 @@
 from .views import (ListCommits, ListAuthors,
-                    ListBranchs, ListPullRequests,DetailCommit)
+                    ListBranchs, ListPullRequests,
+                    DetailCommit, DetailBranch)
 from django.urls import path
 
 urlpatterns = [
@@ -7,5 +8,6 @@ urlpatterns = [
     path('commits/<str:hash>/', DetailCommit.as_view()),
     path('authors/', ListAuthors.as_view()),
     path('branchs/', ListBranchs.as_view()),
+    path('branchs/<str:branch_name>/', DetailBranch.as_view()),
     path('pull_requests/', ListPullRequests.as_view()),
 ]
